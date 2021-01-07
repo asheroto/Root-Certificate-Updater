@@ -1,0 +1,182 @@
+﻿Imports System.IO
+Imports System.Net
+Imports System.ComponentModel
+
+Public Class MainWindow
+    Private Sub Button_Go_Click(sender As Object, e As EventArgs) Handles Button_Go.Click
+        Try
+
+            'Prenotify
+            MessageBox.Show("Here we go... this process is super fast!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            Button_Go.Enabled = False
+
+            'Create a directory to hold the files
+            Dim cdir As String = Path.GetTempPath()
+
+            'Erase existing files
+            EraseExisting()
+
+            'Download certs in STL format
+            Dim authroot As String = "http://ctldl.windowsupdate.com/msdownload/update/v3/static/trustedr/en/authrootstl.cab"
+            Dim authrootfile As String = cdir & "\authrootstl.cab"
+            Dim a = New Net.WebClient
+            a.DownloadFile(authroot, authrootfile)
+            Dim disallowed As String = "http://ctldl.windowsupdate.com/msdownload/update/v3/static/trustedr/en/disallowedcertstl.cab"
+            Dim disallowedfile As String = cdir & "\disallowedcertstl.cab"
+            a.DownloadFile(disallowed, disallowedfile)
+
+            'Extract 7z
+            Dim b As Byte() = My.Resources._7z
+            File.WriteAllBytes(cdir & "\7z.exe", b)
+
+            'Extract
+            Dim z As New Process
+            z.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            z.StartInfo.FileName = cdir & "\7z.exe"
+            z.StartInfo.WorkingDirectory = cdir
+            z.StartInfo.Arguments = "-ao e authrootstl.cab"
+            z.Start()
+            z.StartInfo.Arguments = "-ao e disallowedcertstl.cab"
+            z.Start()
+
+            'Run certutil
+            Dim k As New Process
+            k.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            k.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System)
+            k.StartInfo.FileName = "certutil.exe"
+            k.StartInfo.Arguments = "--addstore -f disallowed " & cdir & "\disallowedcert.stl"
+            k.Start()
+
+            'Disable button
+            Button_Go.Text = "ROOT CERTIFICATE INSTALLATION SUCCESSFUL"
+
+            'Notify
+            MessageBox.Show("The root certificates were successfully downloaded and installed. You may need to restart the computer for changes to take effect. You may click OK and close the program now.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            EraseExisting()
+
+        Catch ex As Exception
+            MessageBox.Show("An error has occurred. If you could please e-mail support@asher.tools with the following error message, we will get back with you to resolve the issue." + vbCrLf + vbCrLf + ex.ToString)
+            Button_Go.Enabled = True
+            Exit Sub
+        End Try
+
+    End Sub
+
+    Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        MessageBox.Show("Greetings! Please note that you MUST be connected to the Internet for this program to work.", "Important Notice", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        Dim cdir As String = Path.GetTempPath()
+        Label_TempPath.Text = cdir
+        Timer_AppUpdate.Enabled = True
+    End Sub
+
+    Private Sub Label_RootCertCabs_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles Label_RootCertCabs.LinkClicked
+        Try
+            Process.Start(Label_RootCertCabs.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub Label_DisallowedCertsCab_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles Label_DisallowedCertsCab.LinkClicked
+        Try
+            Process.Start(Label_DisallowedCertsCab.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub EraseExisting()
+        Try
+            'Create a directory to hold the files
+            Dim cdir As String = Path.GetTempPath()
+
+            'Erase existing files
+            If File.Exists(cdir + "\authrootstl.cab") Then
+                File.Delete(cdir + "\authrootstl.cab")
+            End If
+            If File.Exists(cdir + "\disallowedcertstl.cab") Then
+                File.Delete(cdir + "\disallowedcertstl.cab")
+            End If
+            If File.Exists(cdir & "\7z.exe") Then
+                File.Delete(cdir & "\7z.exe")
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub Timer_AppUpdate_Tick(sender As Object, e As EventArgs) Handles Timer_AppUpdate.Tick
+        Timer_AppUpdate.Enabled = False
+
+        If BackgroundWorker_AppUpdate.IsBusy = False Then BackgroundWorker_AppUpdate.RunWorkerAsync()
+
+    End Sub
+
+    Private Sub BackgroundWorker_AppUpdate_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker_AppUpdate.DoWork
+        Try
+            Dim hasConnection As Boolean = My.Computer.Network.Ping("api.asher.tools")
+            If hasConnection = False Then Throw New Exception("Cannot ping asher.tools")
+
+            Dim api_data = New WebClient().DownloadString("https://api.asher.tools/software/root-certificate-updater")
+            Dim api_ashertools As API = JsonConvert.DeserializeObject(Of API)(api_data)
+
+            Dim latest_version = New Version(api_ashertools.version_number)
+            Dim my_version = New Version(Mid(My.Application.Info.Version.ToString, 1, Len(My.Application.Info.Version.ToString) - 2))
+            Dim result = latest_version.CompareTo(my_version)
+
+            If result > 0 Then
+                'Newer version available
+                Me.Invoke(Sub()
+                              Dim ask =
+                                        MsgBox("Newer version available, click OK to Download.", vbInformation + vbOKCancel)
+
+                              If ask = vbOK Then
+                                  Dim x As New Process
+                                  x.StartInfo.UseShellExecute = True
+                                  x.StartInfo.FileName = api_ashertools.download_url
+                                  x.StartInfo.WindowStyle = ProcessWindowStyle.Normal
+                                  x.Start()
+                              End If
+                          End Sub)
+            Else
+                'No newer version available
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub ThirdPartyLicenseInfo_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles ThirdPartyLicenseInfo.LinkClicked
+        Try
+            Process.Start("https://github.com/asheroto/Root-Certificate-Updater/blob/master/LICENSES.md")
+        Catch ex As Exception
+
+        End Try
+    End Sub
+End Class
+
+Public Class API
+    Private m_version_number As String
+
+    Public Property version_number As String
+        Get
+            Return m_version_number
+        End Get
+        Set(value As String)
+            m_version_number = value
+        End Set
+    End Property
+
+    Private m_download_url As String
+
+    Public Property download_url As String
+        Get
+            Return m_download_url
+        End Get
+        Set(value As String)
+            m_download_url = value
+        End Set
+    End Property
+End Class

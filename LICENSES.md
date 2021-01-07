@@ -1,0 +1,1 @@
+7-Zip used with permission in accordance with license agreement located at https://7-zip.org/license.txt
