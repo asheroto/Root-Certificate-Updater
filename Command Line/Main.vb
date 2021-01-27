@@ -2,6 +2,8 @@
 
 Module Main
 
+    Dim cdir As String = Nothing
+
     Sub Main()
         'Get command line arguments
         Dim s() As String = Environment.GetCommandLineArgs()
@@ -18,39 +20,22 @@ Module Main
         Console.WriteLine("Use the ""silent"" argument to run, for example:")
         Console.WriteLine("    RootCertUpdaterCmd.exe silent")
         Console.WriteLine()
-        Dim cdir2 As String = Path.GetTempPath()
-        Dim logPath2 As String = cdir2 & "RootCertUpdaterCmd-Log.txt"
-        Console.WriteLine("The log file when ran silently is stored at " + logPath2)
         End
 
 RunCertUpdater:
 
         'Create a directory to hold the files
-        Dim cdir As String = Path.GetTempPath()
-        Dim logPath As String = cdir & "RootCertUpdaterCmd-Log.txt"
-
-        'Create a log file
-        If File.Exists(logPath) Then
-            Try
-                File.Delete(logPath)
-            Catch ex As Exception
-                Console.WriteLine("Could not delete existing log file! Please restart your computer and try again if the process fails any further.")
-                Console.WriteLine()
-            End Try
-        End If
-        Dim logWrite As StreamWriter
-        logWrite = My.Computer.FileSystem.OpenTextFileWriter(logPath, True)
+        Dim r As New Random
+        cdir = Path.GetTempPath & "RCU_" & r.Next(1000, 100000).ToString
 
         Try
             'Prenotify
             Dim prenotify1 As String = "Here we go... this process is super fast!"
-            logWrite.WriteLine(prenotify1)
-            logWrite.WriteLine()
             Console.WriteLine(prenotify1)
             Console.WriteLine()
 
-            'Erase existing files
-            EraseExisting()
+            'Prep folder
+            If Directory.Exists(cdir) = False Then Directory.CreateDirectory(cdir)
 
             'Download certs in STL format
             Dim authroot As String = "http://ctldl.windowsupdate.com/msdownload/update/v3/static/trustedr/en/authrootstl.cab"
@@ -70,71 +55,43 @@ RunCertUpdater:
             z.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
             z.StartInfo.FileName = cdir & "\7z.exe"
             z.StartInfo.WorkingDirectory = cdir
-            z.StartInfo.Arguments = "-ao e authrootstl.cab"
+            z.StartInfo.Arguments = "e authrootstl.cab"
             z.Start()
-            z.StartInfo.Arguments = "-ao e disallowedcertstl.cab"
+            z.StartInfo.Arguments = "e disallowedcertstl.cab"
             z.Start()
 
             'Run certutil
             Dim k As New Process
             k.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-            k.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System)
+            k.StartInfo.WorkingDirectory = cdir
             k.StartInfo.FileName = "certutil.exe"
-            k.StartInfo.Arguments = "--addstore -f disallowed " & cdir & "\disallowedcert.stl"
+            k.StartInfo.Arguments = "-addstore -f root authroot.stl"
             k.Start()
-            k.StartInfo.Arguments = ""
+            k.StartInfo.Arguments = "-addstore -f disallowed disallowedcert.stl"
+            k.Start()
 
             'Notify
-            Dim notify1 As String = "The root certificates were successfully downloaded and installed." + vbCrLf + "You need to restart the computer for changes to take effect." + vbCrLf + vbCrLf + "Log file stored: " + logPath
-
-            logWrite.WriteLine(notify1)
-            logWrite.WriteLine()
+            Dim notify1 As String = "The root certificates were successfully downloaded and installed." + vbCrLf + "You need to restart the computer for changes to take effect."
             Console.WriteLine(notify1)
             Console.WriteLine()
 
-            EraseExisting()
+            'Delete temp directory
+            Try
+                Directory.Delete(cdir, True)
+            Catch ex As Exception
 
+            End Try
         Catch ex As Exception
             Dim err1 As String = "An error has occurred. Please e-mail support@asher.tools with the following error message." + vbCrLf + "We will get back with you to resolve the issue."
             Dim err2 As String = "----------------------"
             Dim err3 As String = "Error: " + ex.ToString
             Dim err4 As String = "----------------------"
-            logWrite.WriteLine(err1)
-            logWrite.WriteLine()
-            logWrite.WriteLine(err2)
-            logWrite.WriteLine(err3)
-            logWrite.WriteLine(err4)
             Console.WriteLine(err1)
-            Console.WriteLine()
             Console.WriteLine(err2)
             Console.WriteLine(err3)
             Console.WriteLine(err4)
 
             End
-        End Try
-        Try
-            logWrite.Close()
-        Catch ex As Exception
-
-        End Try
-
-
-    End Sub
-
-    Private Sub EraseExisting()
-        Try
-            Dim cdir As String = Path.GetTempPath()
-            If File.Exists(cdir + "\authrootstl.cab") Then
-                File.Delete(cdir + "\authrootstl.cab")
-            End If
-            If File.Exists(cdir + "\disallowedcertstl.cab") Then
-                File.Delete(cdir + "\disallowedcertstl.cab")
-            End If
-            If File.Exists(cdir & "\7z.exe") Then
-                File.Delete(cdir & "\7z.exe")
-            End If
-        Catch ex As Exception
-
         End Try
     End Sub
 
