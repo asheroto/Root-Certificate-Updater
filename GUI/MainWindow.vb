@@ -1,8 +1,11 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Net
-Imports System.ComponentModel
 
 Public Class MainWindow
+
+    Dim cdir As String = Nothing
+
     Private Sub Button_Go_Click(sender As Object, e As EventArgs) Handles Button_Go.Click
         Try
 
@@ -11,11 +14,8 @@ Public Class MainWindow
 
             Button_Go.Enabled = False
 
-            'Create a directory to hold the files
-            Dim cdir As String = Path.GetTempPath()
-
-            'Erase existing files
-            EraseExisting()
+            'Prep folder
+            If Directory.Exists(cdir) = False Then Directory.CreateDirectory(cdir)
 
             'Download certs in STL format
             Dim authroot As String = "http://ctldl.windowsupdate.com/msdownload/update/v3/static/trustedr/en/authrootstl.cab"
@@ -35,17 +35,19 @@ Public Class MainWindow
             z.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
             z.StartInfo.FileName = cdir & "\7z.exe"
             z.StartInfo.WorkingDirectory = cdir
-            z.StartInfo.Arguments = "-ao e authrootstl.cab"
+            z.StartInfo.Arguments = "e authrootstl.cab"
             z.Start()
-            z.StartInfo.Arguments = "-ao e disallowedcertstl.cab"
+            z.StartInfo.Arguments = "e disallowedcertstl.cab"
             z.Start()
 
             'Run certutil
             Dim k As New Process
             k.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-            k.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System)
+            k.StartInfo.WorkingDirectory = cdir
             k.StartInfo.FileName = "certutil.exe"
-            k.StartInfo.Arguments = "--addstore -f disallowed " & cdir & "\disallowedcert.stl"
+            k.StartInfo.Arguments = "-addstore -f root authroot.stl"
+            k.Start()
+            k.StartInfo.Arguments = "-addstore -f disallowed disallowedcert.stl"
             k.Start()
 
             'Disable button
@@ -54,8 +56,12 @@ Public Class MainWindow
             'Notify
             MessageBox.Show("The root certificates were successfully downloaded and installed. You may need to restart the computer for changes to take effect. You may click OK and close the program now.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            EraseExisting()
+            'Delete temp directory
+            Try
+                Directory.Delete(cdir, True)
+            Catch ex As Exception
 
+            End Try
         Catch ex As Exception
             MessageBox.Show("An error has occurred. If you could please e-mail support@asher.tools with the following error message, we will get back with you to resolve the issue." + vbCrLf + vbCrLf + ex.ToString)
             Button_Go.Enabled = True
@@ -66,7 +72,10 @@ Public Class MainWindow
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MessageBox.Show("Greetings! Please note that you MUST be connected to the Internet for this program to work.", "Important Notice", MessageBoxButtons.OK, MessageBoxIcon.Question)
-        Dim cdir As String = Path.GetTempPath()
+
+        Dim r As New Random
+        cdir = Path.GetTempPath & "RCU_" & r.Next(1000, 100000).ToString
+
         Label_TempPath.Text = cdir
         Timer_AppUpdate.Enabled = True
     End Sub
@@ -87,31 +96,10 @@ Public Class MainWindow
         End Try
     End Sub
 
-    Private Sub EraseExisting()
-        Try
-            'Create a directory to hold the files
-            Dim cdir As String = Path.GetTempPath()
-
-            'Erase existing files
-            If File.Exists(cdir + "\authrootstl.cab") Then
-                File.Delete(cdir + "\authrootstl.cab")
-            End If
-            If File.Exists(cdir + "\disallowedcertstl.cab") Then
-                File.Delete(cdir + "\disallowedcertstl.cab")
-            End If
-            If File.Exists(cdir & "\7z.exe") Then
-                File.Delete(cdir & "\7z.exe")
-            End If
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
     Private Sub Timer_AppUpdate_Tick(sender As Object, e As EventArgs) Handles Timer_AppUpdate.Tick
         Timer_AppUpdate.Enabled = False
 
         If BackgroundWorker_AppUpdate.IsBusy = False Then BackgroundWorker_AppUpdate.RunWorkerAsync()
-
     End Sub
 
     Private Sub BackgroundWorker_AppUpdate_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker_AppUpdate.DoWork
@@ -155,6 +143,7 @@ Public Class MainWindow
 
         End Try
     End Sub
+
 End Class
 
 Public Class API
