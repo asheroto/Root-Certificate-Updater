@@ -82,6 +82,7 @@ RunCertUpdater:
 
             End Try
         Catch ex As Exception
+
             Dim err1 As String = "An error has occurred. Please e-mail support@asher.tools with the following error message." + vbCrLf + "We will get back with you to resolve the issue."
             Dim err2 As String = "----------------------"
             Dim err3 As String = "Error: " + ex.ToString
