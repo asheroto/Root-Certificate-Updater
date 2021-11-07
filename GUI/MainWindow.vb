@@ -12,12 +12,13 @@ Public Class MainWindow
             'Prenotify
             MessageBox.Show("Here we go... this process is super fast!", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+            'Disable button control
             Button_Go.Enabled = False
 
-            'Prep folder
+            'Prep temp folder
             If Directory.Exists(cdir) = False Then Directory.CreateDirectory(cdir)
 
-            'Download certs in STL format
+            'Download certs
             Dim authroot As String = "http://ctldl.windowsupdate.com/msdownload/update/v3/static/trustedr/en/authrootstl.cab"
             Dim authrootfile As String = cdir & "\authrootstl.cab"
             Dim a = New Net.WebClient
@@ -30,7 +31,7 @@ Public Class MainWindow
             Dim b As Byte() = My.Resources._7z
             File.WriteAllBytes(cdir & "\7z.exe", b)
 
-            'Extract
+            'Extract certificates from cab archives
             Dim z As New Process
             z.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
             z.StartInfo.FileName = cdir & "\7z.exe"
@@ -40,7 +41,7 @@ Public Class MainWindow
             z.StartInfo.Arguments = "e disallowedcertstl.cab"
             z.Start()
 
-            'Run certutil
+            'Run certutil to apply certificates
             Dim k As New Process
             k.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
             k.StartInfo.WorkingDirectory = cdir
@@ -52,7 +53,7 @@ Public Class MainWindow
             k.StartInfo.Arguments = "-addstore -f disallowed disallowedcert.stl"
             k.Start()
 
-            'Disable button
+            'Change button text
             Button_Go.Text = "ROOT CERTIFICATE INSTALLATION SUCCESSFUL"
 
             'Notify
@@ -65,7 +66,7 @@ Public Class MainWindow
 
             End Try
         Catch ex As Exception
-            MessageBox.Show("An error has occurred. If you could please e-mail support@asher.tools with the following error message, we will get back with you to resolve the issue." + vbCrLf + vbCrLf + ex.ToString)
+            MessageBox.Show("An error has occurred. If you could please e-mail support@asher.tools with the following error message, we will get back with you to resolve the issue." + vbNewLine + vbNewLine + ex.ToString)
             Button_Go.Enabled = True
             Exit Sub
         End Try
@@ -73,7 +74,7 @@ Public Class MainWindow
     End Sub
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        MessageBox.Show("Greetings! Please note that you MUST be connected to the Internet for this program to work.", "Important Notice", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        MessageBox.Show("Greetings! Please note that you MUST be connected to the Internet for this program to work.", "Important Notice", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         Dim r As New Random
         cdir = Path.GetTempPath & "RCU_" & r.Next(1000, 100000).ToString
@@ -139,7 +140,7 @@ Public Class MainWindow
 
     Private Sub ThirdPartyLicenseInfo_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles ThirdPartyLicenseInfo.LinkClicked
         Try
-            Process.Start("https://github.com/asheroto/Root-Certificate-Updater/blob/master/LICENSES.md")
+            Process.Start("https://github.com/asheroto/Root-Certificate-Updater/blob/master/LICENSE")
         Catch ex As Exception
 
         End Try
