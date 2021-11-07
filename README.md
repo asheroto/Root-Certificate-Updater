@@ -5,7 +5,7 @@ This repo contains **two options** to update root certificates. **Each option pe
 
 If you're not sure which option to choose, use the GUI (the first option) as it's the easiest.
 
-**No changes are made to any settings**, this **only** updates the root certificates.
+**No changes are made to any settings**, this **only** updates the root certificates. Windows Update is NOT required for this to work.
 
 ## Root Certificate Updater
 GUI application for updating root certificates. One click, done.
