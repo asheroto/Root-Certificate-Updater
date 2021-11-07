@@ -113,14 +113,13 @@ Public Class MainWindow
             Dim api_ashertools As API = JsonConvert.DeserializeObject(Of API)(api_data)
 
             Dim latest_version = New Version(api_ashertools.version_number)
-            Dim my_version = New Version(Mid(My.Application.Info.Version.ToString, 1, Len(My.Application.Info.Version.ToString) - 2))
+            Dim my_version = New Version(My.Application.Info.Version.ToString)
             Dim result = latest_version.CompareTo(my_version)
 
             If result > 0 Then
                 'Newer version available
                 Me.Invoke(Sub()
-                              Dim ask =
-                                        MsgBox("Newer version available, click OK to Download.", vbInformation + vbOKCancel)
+                              Dim ask = MsgBox("Newer version available, click OK to Download.", vbInformation + vbOKCancel)
 
                               If ask = vbOK Then
                                   Dim x As New Process
