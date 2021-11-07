@@ -10,13 +10,13 @@ If you're not sure which option to choose, use the GUI (the first option) as it'
 ## Root Certificate Updater
 GUI application for updating root certificates. One click, done.
 
-![enter image description here](https://i.imgur.com/rxl0CTB.png)
+![RootCertificateUpdater.exe](https://asher.tools/img/root_certificate_manager.png)
 ## Root Certificate Updater PowerShell Script
 Update root certificates using a PowerShell script.
 
 **Usage in PowerShell:** `.\RootCertificateUpdaterScript.ps1`
 
-![RootCertificateUpdaterScript.ps1](https://i.imgur.com/DFnnjHi.png)
+![RootCertificateUpdaterScript.ps1](https://asher.tools/img/root_certificate_manager_powershell.png)
 # Downloads
 
 [Download the latest version](https://github.com/asheroto/Root-Certificate-Updater/releases/latest/download/Root_Certificate_Updater.zip) from the releases page or from [asher.tools](https://asher.tools).
