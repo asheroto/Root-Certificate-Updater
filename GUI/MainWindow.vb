@@ -49,6 +49,8 @@ Public Class MainWindow
             k.Start()
             k.StartInfo.Arguments = "-addstore -f disallowed disallowedcert.stl"
             k.Start()
+            k.StartInfo.Arguments = "-addstore -f disallowed disallowedcert.stl"
+            k.Start()
 
             'Disable button
             Button_Go.Text = "ROOT CERTIFICATE INSTALLATION SUCCESSFUL"
@@ -168,4 +170,5 @@ Public Class API
             m_download_url = value
         End Set
     End Property
+
 End Class
