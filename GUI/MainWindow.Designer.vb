@@ -130,13 +130,13 @@ Partial Class MainWindow
         'ThirdPartyLicenseInfo
         '
         Me.ThirdPartyLicenseInfo.AutoSize = True
-        Me.ThirdPartyLicenseInfo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ThirdPartyLicenseInfo.Location = New System.Drawing.Point(475, 368)
+        Me.ThirdPartyLicenseInfo.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ThirdPartyLicenseInfo.Location = New System.Drawing.Point(550, 368)
         Me.ThirdPartyLicenseInfo.Name = "ThirdPartyLicenseInfo"
-        Me.ThirdPartyLicenseInfo.Size = New System.Drawing.Size(143, 17)
+        Me.ThirdPartyLicenseInfo.Size = New System.Drawing.Size(68, 13)
         Me.ThirdPartyLicenseInfo.TabIndex = 8
         Me.ThirdPartyLicenseInfo.TabStop = True
-        Me.ThirdPartyLicenseInfo.Text = "Third Party License Info"
+        Me.ThirdPartyLicenseInfo.Text = "License Info"
         '
         'MainWindow
         '

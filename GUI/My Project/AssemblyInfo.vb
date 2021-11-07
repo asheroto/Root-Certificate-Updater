@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Downloads the latest root certificates from Microsoft and manually installs them.")>
 <Assembly: AssemblyCompany("asher.tools")>
 <Assembly: AssemblyProduct("Root Certificate Updater")>
-<Assembly: AssemblyCopyright("Copyright © 2020-2021 asher.tools")>
+<Assembly: AssemblyCopyright("GNU GPLv3")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -30,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.5.0.0")>
-<Assembly: AssemblyFileVersion("1.5.0.0")>
+<Assembly: AssemblyVersion("1.7.0.0")>
+<Assembly: AssemblyFileVersion("1.7.0.0")>
