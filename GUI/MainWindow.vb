@@ -43,9 +43,11 @@ Public Class MainWindow
             'Run certutil
             Dim k As New Process
             k.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-            k.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System)
+            k.StartInfo.WorkingDirectory = cdir
             k.StartInfo.FileName = "certutil.exe"
-            k.StartInfo.Arguments = "--addstore -f disallowed " & cdir & "\disallowedcert.stl"
+            k.StartInfo.Arguments = "-addstore -f root authroot.stl"
+            k.Start()
+            k.StartInfo.Arguments = "-addstore -f disallowed disallowedcert.stl"
             k.Start()
             k.StartInfo.Arguments = "-addstore -f disallowed disallowedcert.stl"
             k.Start()
