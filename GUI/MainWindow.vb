@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Net
+Imports Newtonsoft.Json
 
 Public Class MainWindow
 
@@ -27,7 +28,7 @@ Public Class MainWindow
             Dim disallowedfile As String = cdir & "\disallowedcertstl.cab"
             a.DownloadFile(disallowed, disallowedfile)
 
-            'Extract 7z
+            'Extract    
             Dim b As Byte() = My.Resources._7z
             File.WriteAllBytes(cdir & "\7z.exe", b)
 
