@@ -55,10 +55,10 @@ Public Class MainWindow
             k.Start()
 
             'Change button text
-            Button_Go.Text = "ROOT CERTIFICATE INSTALLATION SUCCESSFUL"
+            Button_Go.Text = "ROOT CERTIFICATES UPDATED"
 
             'Notify
-            MessageBox.Show("The root certificates were successfully downloaded and installed. You may need to restart the computer for changes to take effect. You may click OK and close the program now.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("The root certificates lists were successfully downloaded and installed. Please restart the computer for changes to take effect. You may click OK and close the program now.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             'Delete temp directory
             Try
@@ -147,6 +147,13 @@ Public Class MainWindow
         End Try
     End Sub
 
+    Private Sub MoreInfoCTL_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles MoreInfoCTL.LinkClicked
+        Try
+            MsgBox("This program will update the Certificate Trust Lists on your computer. Root certificate lists have the hashes of the certificates and don't contain the 'actual' certificates themselves, HOWEVER, this is because when a Windows machine encounters a new certificate that is on the trust list that it hasn't seen before, it will automatically download the needed certificate behind-the-scenes (on demand). The reason we use Certificate Trust Lists instead of the 'actual' certificates is because Windows Update is required to generate the certificates using certutil. If Windows Update is enabled and in use, that means your root certificates would already be up-to-date as it handles root certificate updates automatically. Using this method, we're able to achieve our goal of having the latest root certificates without relying on Windows Update." + vbCrLf + vbCrLf + "Reference: https://bit.ly/ms-ctl-info", vbInformation, MoreInfoCTL.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
 
 Public Class API

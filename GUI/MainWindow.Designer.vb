@@ -35,6 +35,7 @@ Partial Class MainWindow
         Me.Timer_AppUpdate = New System.Windows.Forms.Timer(Me.components)
         Me.BackgroundWorker_AppUpdate = New System.ComponentModel.BackgroundWorker()
         Me.ThirdPartyLicenseInfo = New System.Windows.Forms.LinkLabel()
+        Me.MoreInfoCTL = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
         '
         'Button_Go
@@ -138,12 +139,24 @@ Partial Class MainWindow
         Me.ThirdPartyLicenseInfo.TabStop = True
         Me.ThirdPartyLicenseInfo.Text = "License Info"
         '
+        'MoreInfoCTL
+        '
+        Me.MoreInfoCTL.AutoSize = True
+        Me.MoreInfoCTL.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MoreInfoCTL.Location = New System.Drawing.Point(9, 370)
+        Me.MoreInfoCTL.Name = "MoreInfoCTL"
+        Me.MoreInfoCTL.Size = New System.Drawing.Size(147, 13)
+        Me.MoreInfoCTL.TabIndex = 9
+        Me.MoreInfoCTL.TabStop = True
+        Me.MoreInfoCTL.Text = "About Certificate Trust Lists"
+        '
         'MainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 21.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(634, 392)
+        Me.Controls.Add(Me.MoreInfoCTL)
         Me.Controls.Add(Me.ThirdPartyLicenseInfo)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label_TempPath)
@@ -177,4 +190,5 @@ Partial Class MainWindow
     Friend WithEvents Timer_AppUpdate As Timer
     Friend WithEvents BackgroundWorker_AppUpdate As System.ComponentModel.BackgroundWorker
     Friend WithEvents ThirdPartyLicenseInfo As LinkLabel
+    Friend WithEvents MoreInfoCTL As LinkLabel
 End Class
