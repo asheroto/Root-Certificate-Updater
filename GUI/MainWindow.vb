@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Net
-Imports Newtonsoft.Json
 
 Public Class MainWindow
 
