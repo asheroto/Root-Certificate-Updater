@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainWindow
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class MainWindow
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainWindow))
@@ -30,18 +30,19 @@ Partial Class MainWindow
         Me.Label_RootCertCabs = New System.Windows.Forms.LinkLabel()
         Me.Label_DisallowedCertsCab = New System.Windows.Forms.LinkLabel()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label_TempPath = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Timer_AppUpdate = New System.Windows.Forms.Timer(Me.components)
         Me.BackgroundWorker_AppUpdate = New System.ComponentModel.BackgroundWorker()
         Me.ThirdPartyLicenseInfo = New System.Windows.Forms.LinkLabel()
         Me.MoreInfoCTL = New System.Windows.Forms.LinkLabel()
+        Me.Label_TempPath = New System.Windows.Forms.LinkLabel()
+        Me.Label_ReportIssue = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
         '
         'Button_Go
         '
         Me.Button_Go.BackColor = System.Drawing.Color.White
-        Me.Button_Go.Location = New System.Drawing.Point(12, 286)
+        Me.Button_Go.Location = New System.Drawing.Point(15, 294)
         Me.Button_Go.Name = "Button_Go"
         Me.Button_Go.Size = New System.Drawing.Size(606, 79)
         Me.Button_Go.TabIndex = 0
@@ -63,7 +64,7 @@ Partial Class MainWindow
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(12, 32)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(610, 251)
+        Me.Label2.Size = New System.Drawing.Size(610, 261)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = resources.GetString("Label2.Text")
         '
@@ -97,18 +98,9 @@ Partial Class MainWindow
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(24, 160)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(153, 17)
+        Me.Label3.Size = New System.Drawing.Size(190, 17)
         Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Temp Path (for cab files):"
-        '
-        'Label_TempPath
-        '
-        Me.Label_TempPath.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label_TempPath.Location = New System.Drawing.Point(179, 160)
-        Me.Label_TempPath.Name = "Label_TempPath"
-        Me.Label_TempPath.Size = New System.Drawing.Size(400, 17)
-        Me.Label_TempPath.TabIndex = 6
-        Me.Label_TempPath.Text = "Temp Path"
+        Me.Label3.Text = "Temp Path (for cab && log files):"
         '
         'Label4
         '
@@ -132,7 +124,7 @@ Partial Class MainWindow
         '
         Me.ThirdPartyLicenseInfo.AutoSize = True
         Me.ThirdPartyLicenseInfo.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ThirdPartyLicenseInfo.Location = New System.Drawing.Point(550, 368)
+        Me.ThirdPartyLicenseInfo.Location = New System.Drawing.Point(553, 376)
         Me.ThirdPartyLicenseInfo.Name = "ThirdPartyLicenseInfo"
         Me.ThirdPartyLicenseInfo.Size = New System.Drawing.Size(68, 13)
         Me.ThirdPartyLicenseInfo.TabIndex = 8
@@ -143,23 +135,45 @@ Partial Class MainWindow
         '
         Me.MoreInfoCTL.AutoSize = True
         Me.MoreInfoCTL.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MoreInfoCTL.Location = New System.Drawing.Point(9, 370)
+        Me.MoreInfoCTL.Location = New System.Drawing.Point(12, 378)
         Me.MoreInfoCTL.Name = "MoreInfoCTL"
         Me.MoreInfoCTL.Size = New System.Drawing.Size(147, 13)
         Me.MoreInfoCTL.TabIndex = 9
         Me.MoreInfoCTL.TabStop = True
         Me.MoreInfoCTL.Text = "About Certificate Trust Lists"
         '
+        'Label_TempPath
+        '
+        Me.Label_TempPath.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_TempPath.Location = New System.Drawing.Point(220, 160)
+        Me.Label_TempPath.Name = "Label_TempPath"
+        Me.Label_TempPath.Size = New System.Drawing.Size(400, 17)
+        Me.Label_TempPath.TabIndex = 10
+        Me.Label_TempPath.TabStop = True
+        Me.Label_TempPath.Text = "Temp Path"
+        '
+        'Label_ReportIssue
+        '
+        Me.Label_ReportIssue.AutoSize = True
+        Me.Label_ReportIssue.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label_ReportIssue.Location = New System.Drawing.Point(282, 378)
+        Me.Label_ReportIssue.Name = "Label_ReportIssue"
+        Me.Label_ReportIssue.Size = New System.Drawing.Size(71, 13)
+        Me.Label_ReportIssue.TabIndex = 11
+        Me.Label_ReportIssue.TabStop = True
+        Me.Label_ReportIssue.Text = "Report Issue"
+        '
         'MainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 21.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(634, 392)
+        Me.ClientSize = New System.Drawing.Size(634, 398)
+        Me.Controls.Add(Me.Label_ReportIssue)
+        Me.Controls.Add(Me.Label_TempPath)
         Me.Controls.Add(Me.MoreInfoCTL)
         Me.Controls.Add(Me.ThirdPartyLicenseInfo)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label_TempPath)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label_DisallowedCertsCab)
         Me.Controls.Add(Me.Label_RootCertCabs)
@@ -185,10 +199,11 @@ Partial Class MainWindow
     Friend WithEvents Label_RootCertCabs As LinkLabel
     Friend WithEvents Label_DisallowedCertsCab As LinkLabel
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label_TempPath As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Timer_AppUpdate As Timer
     Friend WithEvents BackgroundWorker_AppUpdate As System.ComponentModel.BackgroundWorker
     Friend WithEvents ThirdPartyLicenseInfo As LinkLabel
     Friend WithEvents MoreInfoCTL As LinkLabel
+    Friend WithEvents Label_TempPath As LinkLabel
+    Friend WithEvents Label_ReportIssue As LinkLabel
 End Class

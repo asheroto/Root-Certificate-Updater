@@ -131,7 +131,7 @@ Step 4: The following two commands are ran to import/apply the newly downloaded 
 
 
 
-Step 5: The cab files and support files are deleted automatically. The certificates are still installed.</value>
+Step 5: On success, the cab and log files are deleted automatically. The certificates are still installed. On failure, the cab and log files are retained.</value>
   </data>
   <metadata name="Timer_AppUpdate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
