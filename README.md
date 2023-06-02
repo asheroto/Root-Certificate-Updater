@@ -1,3 +1,5 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/asheroto)
+
 # Root Certificate Updater
 Update root certificates (and disallowed certificates) on Windows.
 
