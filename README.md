@@ -16,18 +16,23 @@ GUI application for updating root certificates. One click, done.
 ## **Option 2:** PowerShell Script
 Update root certificates using a PowerShell script.
 
-### Usage
-|Command|Description|
-|--|--|
-|`.\UpdateRootCertificates.ps1`|Normal run|
-|`.\UpdateRootCertificates.ps1 -Force`|Skip the 10 second wait before continuing execution|
-
 ### Installation
-You can either download and run the `UpdateRootCertificates.ps1` script from this repo, or install from PowerShell Gallery by typing this in PowerShell:
+You can either download the PS1 script from here, or install using...
 
 ```powershell
 Install-Script UpdateRootCertificates
 ```
+
+This script is published on PowerShell Gallery.
+
+The code is signed, so if you want to change it, just removed the `# SIG # Begin signature block` line and everything beneath it.
+
+### Usage
+|Command|Description|
+|--|--|
+|`UpdateRootCertificates`|Normal run|
+|`UpdateRootCertificates -Force`|Skip the 10 second wait before continuing execution|
+
 ### Screenshot
 ![UpdateRootCertificates.ps1](https://asher.tools/img/root_certificate_updater_script.png)
 
