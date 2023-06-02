@@ -1,6 +1,6 @@
 <#PSScriptInfo
 
-.VERSION 1.11.0
+.VERSION 1.11.2
 
 .GUID 05c58731-6a7a-4a18-9903-03530b7ec896
 
@@ -13,7 +13,9 @@
 .PROJECTURI https://github.com/asheroto/Root-Certificate-Updater
 
 .RELEASENOTES
-[Version 1.11.1] - Initial PowerShell Gallery release.
+[Version 1.11.0] - Initial PowerShell Gallery release.
+[Version 1.11.1] - Fix URL to GUI counterpart.
+[Version 1.11.2] - Signed code.
 
 #>
 
@@ -27,13 +29,13 @@
 
 	This program updates the Certificate Trust Lists on your computer. Root certificate lists have the hashes of the certificates and don't contain the 'actual' certificates themselves, HOWEVER, this is because when a Windows machine encounters a new certificate that is on the trust list that it hasn't seen before, it will automatically download the needed certificate behind-the-scenes (on demand). The reason we use Certificate Trust Lists instead of the 'actual' certificates is because Windows Update is required to generate the certificates using certutil. If Windows Update is enabled and in use, that means your root certificates would already be up-to-date as it handles root certificate updates automatically. Using this method, we're able to achieve our goal of having the latest root certificates without relying on Windows Update.
 
-	Its GUI counterpart is available at https://asher.tools/Root-Certificate-Updater
+	Its GUI counterpart is available at https://github.com/asheroto/Root-Certificate-Updater
 .EXAMPLE
 	Update root certificate lists normally: UpdateRootCertificates.ps1
 .EXAMPLE
 	Update root certificate lists without waiting 10 seconds to continue execution: UpdateRootCertificates.ps1 -Force
 .NOTES
-    Version      : 1.11.0
+    Version      : 1.11.2
     Created by   : asheroto
 .LINK
     Project Site: https://github.com/asheroto/Root-Certificate-Updater
@@ -181,8 +183,8 @@ Pop-Location
 # SIG # Begin signature block
 # MIIpMAYJKoZIhvcNAQcCoIIpITCCKR0CAQExDzANBglghkgBZQMEAgEFADB5Bgor
 # BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
-# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCAsRWV1MXeMAyP7
-# LpMRy0Kvc5b4PQE0IxITzhO9fMbYH6CCDh8wggawMIIEmKADAgECAhAIrUCyYNKc
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCCe5icxhFqdouzN
+# K9PsSMwufFHdQ15UV/nEmvT2WdrQhKCCDh8wggawMIIEmKADAgECAhAIrUCyYNKc
 # TJ9ezam9k67ZMA0GCSqGSIb3DQEBDAUAMGIxCzAJBgNVBAYTAlVTMRUwEwYDVQQK
 # EwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xITAfBgNV
 # BAMTGERpZ2lDZXJ0IFRydXN0ZWQgUm9vdCBHNDAeFw0yMTA0MjkwMDAwMDBaFw0z
@@ -263,22 +265,22 @@ Pop-Location
 # NiBTSEEzODQgMjAyMSBDQTECEA3RSTbNfh/ebxfsd2XDEE0wDQYJYIZIAWUDBAIB
 # BQCgfDAQBgorBgEEAYI3AgEMMQIwADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIB
 # BDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAvBgkqhkiG9w0BCQQxIgQg
-# aFHFabnbDdtuayP/Wd8sE2bLukXL+zOV6ubYj4OgDjgwDQYJKoZIhvcNAQEBBQAE
-# ggIAotWzAWD5qxtTNzxQnDHYsSKJYYr3ZMi59O9z6QHGTO3cAFE04XhBCVEa0JJw
-# FFyR7a77YHp7W/UdhJ9XBS2YYo10NAOoVMjCmIxYPdQwEyvMJuIFP3ZjnfqNI+DM
-# c/pA/Aj3a98DzNJp3obyj3yv7dF0vaWm+QZz6d5eAQ1eAVlUlMDmENJx1nr5dX5J
-# qoVgKuXod0iIVx8tC3IjzHUDlMon92D6Ogc1Lxh98xX+AdBhcYL7Bu+UFKKiEFuH
-# iT3Wgs+3wB63viMskTgodtIlpyonNmZ9SPLgyiLtSJHF3B/g3+Qj7Yhn33eV3o3V
-# T1JnHR7KneBvPdmhd+12jWLbB/0ldjXHSwwMXlsuzKeKzUK68A61nFDjY7fmC+Ge
-# lwQmgMCaJOTQANZI3rpND5fPfijNAEp4nQHwal6pDq7wgisjz2PbEojF31WQVBXw
-# DIQdkeZw66Ld91/LqeT+V7DpCGkcM6O/OvGhQxyhkHSdy1VWoj3HGJ0hS38Lce4z
-# 3wF03UMdDJpVsrMIrAeuYJ+d9n4oEeQYttOY6qyFDT7aakTZt2UxapEe4QsncEUp
-# 7N0Qno9pTQstaIrQR5otlNctDAbSrHlVurquo5NFMgzIDcswo/XI5NRlz1pbIc8L
-# NTXxa05+EE01kzycWEw4x0SV5GtTjVYJFahl24IrzBL/PEWhghc9MIIXOQYKKwYB
+# zOI6eqQgdhoGRRwFFXSB4nqoR23NUR1/bX1XbTBAYN4wDQYJKoZIhvcNAQEBBQAE
+# ggIAhDZgbEGOIZK3ZUIKMUBhY8/ItUN+5hKfYO9rogV999uVRxhxO91DFZfx8a+T
+# lWeujYWn++ndq684sXY1l5/7XUY8Zsn9i6b36M2DUQq9kLHrd7/eLGjmfKM60Xf5
+# mBckDjRiYA455BOauK/eOxEr3wmdJh5krH5mFhKfMHkrxGK9IJ1t1luzWlpaIxjC
+# Qv6efyZ9p8ia2hCTSljPT9TKt3o3S0D3CJJjSvDCqYETVKLeUZbr62ov0+XpQk3d
+# yX7wVdw3IRueEOsR6VXo0yqGgBIDePZqN5GBCjvJnzw0mB5H6A3WD1OxhDszEtZ/
+# 5MkT4RzcVlx0AjUsN+8cOFz+DQDpImXi7kV0e2ccBo0XhHoVhmuGf6yoDMCAvyGG
+# zloiPwIPesmCCFcB1BZBbk1ln/ea/KRbKbsgk0h6FRz7VhKcADmdzVcy8B7Ezo9a
+# WVuBoJicz9uOWTtJr5gC6w7dZry9h2ERQCSr95XQwSROU6IpfBWY3y3nCk42NMVh
+# ZGy53GxnxZQVAU5KECVnU5oD2yIfBwrF7+PBu+tCCceYlihA1bAqWSUc0gcTaxxd
+# YuV9hTLcop30pZ9uClbjYq+p5I3oTRszkOKKUpvwFtO2tJY4fmDPyIB5dw9PAIrL
+# ky/Ad7qwP2F3VDECkB8jaga1Sv4NUqbjL/svcASYtRo/HCChghc9MIIXOQYKKwYB
 # BAGCNwMDATGCFykwghclBgkqhkiG9w0BBwKgghcWMIIXEgIBAzEPMA0GCWCGSAFl
 # AwQCAQUAMHcGCyqGSIb3DQEJEAEEoGgEZjBkAgEBBglghkgBhv1sBwEwMTANBglg
-# hkgBZQMEAgEFAAQg8hTN7JySCDbteBAxCLA7xFe5K8J8nmLlzLINLKLMVb8CEDCc
-# Y4IwxdNMG2yOZicT0KcYDzIwMjMwNjAyMDQ0NzM1WqCCEwcwggbAMIIEqKADAgEC
+# hkgBZQMEAgEFAAQgERAxrRMPmzg68/BhwwZXztjbcLEAihPUz4I7LNjrPI4CEBpD
+# Q97aZGMlRbofK1onYy4YDzIwMjMwNjAyMDUxNjQ1WqCCEwcwggbAMIIEqKADAgEC
 # AhAMTWlyS5T6PCpKPSkHgD1aMA0GCSqGSIb3DQEBCwUAMGMxCzAJBgNVBAYTAlVT
 # MRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE7MDkGA1UEAxMyRGlnaUNlcnQgVHJ1
 # c3RlZCBHNCBSU0E0MDk2IFNIQTI1NiBUaW1lU3RhbXBpbmcgQ0EwHhcNMjIwOTIx
@@ -384,19 +386,19 @@ Pop-Location
 # DkRpZ2lDZXJ0LCBJbmMuMTswOQYDVQQDEzJEaWdpQ2VydCBUcnVzdGVkIEc0IFJT
 # QTQwOTYgU0hBMjU2IFRpbWVTdGFtcGluZyBDQQIQDE1pckuU+jwqSj0pB4A9WjAN
 # BglghkgBZQMEAgEFAKCB0TAaBgkqhkiG9w0BCQMxDQYLKoZIhvcNAQkQAQQwHAYJ
-# KoZIhvcNAQkFMQ8XDTIzMDYwMjA0NDczNVowKwYLKoZIhvcNAQkQAgwxHDAaMBgw
-# FgQU84ciTYYzgpI1qZS8vY+W6f4cfHMwLwYJKoZIhvcNAQkEMSIEIItda3imBBJJ
-# 7HUIzKQ8xfmngAgahW2pSWhiPXap2cmCMDcGCyqGSIb3DQEJEAIvMSgwJjAkMCIE
+# KoZIhvcNAQkFMQ8XDTIzMDYwMjA1MTY0NVowKwYLKoZIhvcNAQkQAgwxHDAaMBgw
+# FgQU84ciTYYzgpI1qZS8vY+W6f4cfHMwLwYJKoZIhvcNAQkEMSIEIDjyDBZKf4P3
+# 4niG5f3ap2zVwv9LHJU6Z+Iwp9L9shnqMDcGCyqGSIb3DQEJEAIvMSgwJjAkMCIE
 # IMf04b4yKIkgq+ImOr4axPxP5ngcLWTQTIB1V6Ajtbb6MA0GCSqGSIb3DQEBAQUA
-# BIICAF+aLdWeJ0zGp9RG1IVqEqpvlu38TWH2gIlIxjZRAHL3+BtR3KzVMqInyJzp
-# Gwf20UKcl0bReyYW3H5fO2XTOKpkbKQea+tqB7z1cQiL6s3ugmnOtXXENMRVLo6G
-# l3QsYtpqRJiQrGnKNrmn4GPDLkCSk0UHin/Ij6mZrEPPU2OVBADOwYqYHesiEHrs
-# 5WvWftgyfVXdEquoOpdHV6D2+BS+/g5z0Avq6HSfEYE6Yn/efK+ojABFSXEq2gJA
-# qrQC2CiEClru8x7Q3gf9LZkq5a9oaknuw+MvfnW5glBJ7tzlMYm2ptAU54sIahfU
-# 6lVhkzvxxJariKXM30i/aaYvXiTyxv1rG0O85OPfDMiC3r6LBuPHIOgw9WCo8+UQ
-# V2e52ReOIDKDcz2bX6Drny1z8f294yj5mQF1AwHcHFrPGCEVGqD37mxuTwkDtZb8
-# UmpXvc4uyhFpJONffv42hFmv3OiqiMq+FPkJ8fDPnohbhqX6pfNEshGD+zbA1+55
-# gwgZKUjdIuZFHmHjBqZyYRF9dX9zLE1LaAkpTFtQCNb3MMa4ySGTEg3KW9FlG+Lo
-# JnZEwyUTahR816tj2M2tiuXKfbZ3Yu25ufdS32sw22AovnqqsnExBgpxHC633qyp
-# MFJthalkUgKo444Fif5PO+052dFXxdxjKhWBrfu/cBG014OH
+# BIICAAyoUwxRrznpi29C9Dtj2Yjfsabp5HdbfrjbxB3htD+PBf2FIr98as6qYdI9
+# zWR8SGSy+C4O0Yw8sxUkRXkEbjAoViU+NMVdTwJlOZBNIyWKgBJ4i7eEFOsP9oP9
+# aXN7MTTAeC99+mH8dkGB9UfsOWh9DUmyAssxdCxlomdAqGrTvkAyH/Z99V1Mx3e5
+# 1eEm1kJV9otzCu4hZ3oVXUd80HYKl3UXfNZXsVnnN1Iv2wWqotEXnjzspcnmN8Zv
+# vQqLNkKNpEBA1LnpnJGdU2FUyxdFAuW3joLMLPtUkX4Dw64j6Mfx5QBGgQpm9eIo
+# F8ywKXZran/B88YOkcA0UhS6isGcQs4N0LQTdwImjhEk4gcCRGWjyvlz+DZeKmnF
+# MBwuIGTAht4r00CE1O84ZaGWfK8s4QJAIXIitQl9mIpC5iwmGnmO6nKR//shqu58
+# dZrO7KORJfOe4AqgzUJhzt/pSBJk27ew+BxMRoEwdOtU2M+AaPFLho9yUhjM1rwR
+# SkEkjYFgIXm9rsZ/u/kys+TbNs7UYThhIZaEd4Tktqd/SGRPmDfqDrTVXGKBojV0
+# 461lF28CuF6sVsDWmOrv30n9MotOQmxxvhkvkkDJKQ+cpSwyiYzN3qNH9ZHY/c9I
+# 8jLOY1wOOC4rXzPhN603QJ4a/8JQ8ep/gDm7gID7CL5D7ZA7
 # SIG # End signature block
