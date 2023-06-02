@@ -23,7 +23,7 @@ You can either download the PS1 script from here, or install using...
 Install-Script UpdateRootCertificates
 ```
 
-This script is published on PowerShell Gallery.
+This script is published on [PowerShell Gallery](https://www.powershellgallery.com/packages/UpdateRootCertificates).
 
 The code is signed, so if you want to change it, just removed the `# SIG # Begin signature block` line and everything beneath it.
 
