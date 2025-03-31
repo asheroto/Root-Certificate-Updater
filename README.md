@@ -7,6 +7,9 @@
 
 # Root Certificate Updater
 
+> [!NOTE]
+> The **EXE (GUI) version has been deprecated** and is no longer maintained. Only the **PowerShell script version** is current and supported.
+
 Update root certificates (and disallowed certificates) on Windows.
 
 This script downloads and installs the latest `.sst` files from Microsoft containing trusted and disallowed root certificates.
@@ -14,16 +17,6 @@ This script downloads and installs the latest `.sst` files from Microsoft contai
 **No changes are made to any system settings**, and **Windows Update is NOT required** for this to work.
 
 ![UpdateRootCertificates Screenshot](https://github.com/user-attachments/assets/15a58740-79cb-488c-a78c-64a99e15104c)
-
----
-
-## ⚠️ Notice
-
-The **EXE (GUI) version has been deprecated** and is no longer maintained.
-
-Only the **PowerShell script version** is current and supported.
-
----
 
 ## Running the script
 
