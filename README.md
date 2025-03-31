@@ -8,7 +8,7 @@
 # Root Certificate Updater
 
 > [!NOTE]
-> The **EXE (GUI) version has been deprecated** and is no longer maintained. Only the **PowerShell script version** is current and supported.
+> The EXE (GUI) version has been deprecated and replaced by the PowerShell script version, which is now the only actively supported method. The EXE remains available in the repository for historical reference but is no longer maintained.
 
 Update root certificates (and disallowed certificates) on Windows.
 
