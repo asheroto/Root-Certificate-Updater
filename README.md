@@ -27,7 +27,7 @@ Only the **PowerShell script version** is current and supported.
 
 You can either:
 
-- Download the `.ps1` script directly from this repository
+- Download the [latest code-signed release](https://github.com/asheroto/Root-Certificate-Updater/releases/latest/download/UpdateRootCertificates.ps1) of the script
 
 **OR**
 
