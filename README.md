@@ -41,8 +41,6 @@ Install-Script UpdateRootCertificates
 
 Published here: [PowerShell Gallery – UpdateRootCertificates](https://www.powershellgallery.com/packages/UpdateRootCertificates)
 
-> The code is signed. If you want to edit it, remove the `# SIG # Begin signature block` and everything below it.
-
 ---
 
 ### Usage
