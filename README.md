@@ -13,13 +13,13 @@ This script downloads and installs the latest `.sst` files from Microsoft contai
 
 **No changes are made to any system settings**, and **Windows Update is NOT required** for this to work.
 
-### Screenshot
+## Screenshot
 
 ![UpdateRootCertificates Screenshot](https://github.com/user-attachments/assets/15a58740-79cb-488c-a78c-64a99e15104c)
 
 ---
 
-### ⚠️ Notice
+## ⚠️ Notice
 
 The **EXE (GUI) version has been deprecated** and is no longer maintained.
 
@@ -27,7 +27,7 @@ Only the **PowerShell script version** is current and supported.
 
 ---
 
-### Running the script
+## Running the script
 
 You can either:
 
@@ -47,7 +47,7 @@ Published here: [PowerShell Gallery – UpdateRootCertificates](https://www.powe
 
 ---
 
-### Usage
+## Usage
 
 | Command                           | Description                                           |
 | --------------------------------- | ----------------------------------------------------- |
@@ -57,7 +57,7 @@ Published here: [PowerShell Gallery – UpdateRootCertificates](https://www.powe
 
 ---
 
-### Other Notes
+## Other Notes
 
 - The PowerShell version downloads `.sst` files directly (e.g., `authroots.sst`, `updroots.sst`, `roots.sst`, `disallowedcert.sst`) from Microsoft’s root certificate update service.
 - Files are installed using `certutil`
