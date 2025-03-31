@@ -30,7 +30,7 @@ You can either:
 
 ```powershell
 
-Install-Script UpdateRootCertificates
+Install-Script UpdateRootCertificates -Force
 
 ```
 
