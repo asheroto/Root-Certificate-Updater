@@ -16,8 +16,8 @@
 [Version 1.11.0] - Initial PowerShell Gallery release.
 [Version 1.11.1] - Fix URL to GUI counterpart.
 [Version 2.0.0] - Refactored & signed code.
-[Version 3.0.0] - Switched from Certificate Trusts Lists to Certificates due to revocation issues.
-[Version 3.1.0] - Added CheckForUpdate, UpdateSelf, Version, and Help parameters.
+[Version 3.0.0] - Major rewrite.  Switched from Certificate Trusts Lists to Certificates.
+[Version 3.1.0] - Added CheckForUpdate, UpdateSelf, Version, and Help parameters. Added test for admin privileges. Improved output formatting.
 
 #>
 
@@ -202,6 +202,26 @@ function UpdateSelf {
 	}
 }
 
+function Test-AdminPrivileges {
+	<#
+    .SYNOPSIS
+        Checks if the script is running with Administrator privileges. Returns $true if running with Administrator privileges, $false otherwise.
+
+    .DESCRIPTION
+        This function checks if the current PowerShell session is running with Administrator privileges by examining the role of the current user. It returns $true if the current user is an Administrator, $false otherwise.
+
+    .EXAMPLE
+        Test-AdminPrivileges
+
+    .NOTES
+        This function is particularly useful for scripts that require elevated permissions to run correctly.
+    #>
+	if (([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+		return $true
+	}
+	return $false
+}
+
 function Write-Section($text) {
 	<#
         .SYNOPSIS
@@ -251,13 +271,17 @@ Write-Output "To check for updates, run UpdateRootCertificates -CheckForUpdate"
 
 # Check if the current user is an administrator
 if (-not (Test-AdminPrivileges)) {
-    Write-Warning "UpdateRootCertificates requires Administrator privileges to install. Please run the script as an Administrator and try again."
-    ExitWithDelay 1
+	Write-Warning "UpdateRootCertificates requires Administrator privileges to install. Please run the script as an Administrator and try again."
+	ExitWithDelay 1
 }
 
+Write-Output ""
 Write-Output "This script downloads and installs updated root and disallowed certificates from Microsoft."
+Write-Output ""
 Write-Output "These are used by Windows to determine whether to trust or reject connections, software, and other services."
-Write-Output "Reference: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/faqs-root-certificates"
+Write-Output ""
+Write-Output "Reference: https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/certificate-trust"
+Write-Output ""
 Write-Output ("-" * 50)
 
 if (-not $Force) {
@@ -334,6 +358,7 @@ Write-Output "$disallowedFile installed to Disallowed store."
 Write-Section "Cleanup"
 
 Remove-Item authroots.sst, updroots.sst, roots.sst, disallowedcert.sst
+Write-Output "Temporary files removed."
 
 Write-Section "Completed"
 
