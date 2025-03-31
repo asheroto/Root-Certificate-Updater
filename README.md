@@ -23,7 +23,7 @@ Only the **PowerShell script version** is current and supported.
 
 ---
 
-### Installation
+### Running the script
 
 You can either:
 
