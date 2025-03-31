@@ -5,10 +5,10 @@
 <a href="https://ko-fi.com/asheroto"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Ko-Fi Button" height="20px"></a>
 <a href="https://www.buymeacoffee.com/asheroto"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=Root-Certificate-Updater&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff)" height="40px"></a>
 
-# Root Certificate Updater
+# UpdateRootCertificates (Root Certificate Updater)
 
 > [!NOTE]
-> The EXE (GUI) version has been deprecated and replaced by the PowerShell script version, which is now the only actively supported method. The EXE remains available in the repository for historical reference but is no longer maintained.
+> The EXE (GUI) version has been deprecated and replaced by the PowerShell script version, which is now the only actively supported method. The EXE remains available in the repository for historical reference but is no longer maintained. The repository `Root-Certificate-Updater` has been renamed to `UpdateRootCertificates` to match the name of the script.
 
 Update root certificates (and disallowed certificates) on Windows.
 
@@ -40,11 +40,15 @@ Published here: [PowerShell Gallery – UpdateRootCertificates](https://www.powe
 
 ## Usage
 
-| Command                           | Description                                           |
-| --------------------------------- | ----------------------------------------------------- |
-| `UpdateRootCertificates`          | Normal execution                                      |
-| `UpdateRootCertificates -Force`   | Skips the 10-second wait before running               |
-| `UpdateRootCertificates -Verbose` | Shows detailed output during certificate installation |
+| Command                                  | Description                                                      |
+| ---------------------------------------- | ---------------------------------------------------------------- |
+| `UpdateRootCertificates`                 | Normal execution                                                 |
+| `UpdateRootCertificates -Force`          | Skips the 10-second wait before running                          |
+| `UpdateRootCertificates -Verbose`        | Shows detailed output during certificate installation            |
+| `UpdateRootCertificates -CheckForUpdate` | Checks for the latest version of the script                      |
+| `UpdateRootCertificates -UpdateSelf`     | Updates the script to the latest version from PowerShell Gallery |
+| `UpdateRootCertificates -Version`        | Displays the current script version                              |
+| `UpdateRootCertificates -Help`           | Displays full help documentation                                 |
 
 ---
 
