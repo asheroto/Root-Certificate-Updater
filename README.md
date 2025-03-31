@@ -13,6 +13,10 @@ This script downloads and installs the latest `.sst` files from Microsoft contai
 
 **No changes are made to any system settings**, and **Windows Update is NOT required** for this to work.
 
+### Screenshot
+
+![UpdateRootCertificates Screenshot](https://github.com/user-attachments/assets/15a58740-79cb-488c-a78c-64a99e15104c)
+
 ---
 
 ### ⚠️ Notice
@@ -50,12 +54,6 @@ Published here: [PowerShell Gallery – UpdateRootCertificates](https://www.powe
 | `UpdateRootCertificates`          | Normal execution                                      |
 | `UpdateRootCertificates -Force`   | Skips the 10-second wait before running               |
 | `UpdateRootCertificates -Verbose` | Shows detailed output during certificate installation |
-
----
-
-### Screenshot
-
-![UpdateRootCertificates Screenshot](https://github.com/user-attachments/assets/15a58740-79cb-488c-a78c-64a99e15104c)
 
 ---
 
