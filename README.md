@@ -13,8 +13,6 @@ This script downloads and installs the latest `.sst` files from Microsoft contai
 
 **No changes are made to any system settings**, and **Windows Update is NOT required** for this to work.
 
-## Screenshot
-
 ![UpdateRootCertificates Screenshot](https://github.com/user-attachments/assets/15a58740-79cb-488c-a78c-64a99e15104c)
 
 ---
